@@ -5,7 +5,7 @@ const ContactList = ({ filter, contacts, removeContact }) => {
 
   return (
     <>
-      <ul className={styles.list}>
+      <ul className={styles.contactsList}>
         {contacts
           .filter(element =>
             element.name.toLowerCase().includes(filter.toLowerCase())
@@ -14,7 +14,7 @@ const ContactList = ({ filter, contacts, removeContact }) => {
             <li key={contact.id} className={styles.li}>
               {contact.name}: {contact.number}
               <button
-                className={styles.button}
+                className={styles.listButton}
                 type="submit"
                 onClick={() => removeContact(contact.id)}
               >

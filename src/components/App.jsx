@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { nanoid } from "nanoid";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
 import Filter from "./Filter/Filter";
+import styles from "./App.module.css";
 
 export default class App extends Component {
   state = {
@@ -39,21 +38,6 @@ export default class App extends Component {
     }));
   };
 
-    // if (this.contacts.filter.length > 0) {
-    //   window.alert(JSON.stringify(`${name} is already in contacts`));
-    //   return;
-    // }
-  //   this.setState(prev => {
-  //     const list = [...prev.contacts];
-  //     list.push({
-  //       id: nanoid(),
-  //       [name]: name,
-  //       [number]: number,
-  //     });
-  //     return { contacts: list };
-  //   });
-  // };
-
   handleFilter = e => {
     this.setState({ filter: e.currentTarget.value });
   };
@@ -69,10 +53,10 @@ export default class App extends Component {
   render() {
     const { filter } = this.state;
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={styles.container}>
+        <h1 className={styles.header}>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
-        <h2>Contacts</h2>
+        <h2 className={styles.header}>Contacts</h2>
         <Filter value={filter} handleChange={this.handleFilter}/>
         <ContactList
            filter={this.state.filter}

@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
+import styles from "./Filter.module.css";
 
 const Filter = ({ value, handleChange }) => {
   const searchId = nanoid();
 
   return (
-    <div>
-      <label htmlFor={searchId}>Find contacts by name </label>
-      <input
+    <div className={styles.filterWrapper}>
+      <label htmlFor={searchId} >Find contacts by name </label>
+      <input className={styles.inputFilter}
         type="text"
         placeholder="Filter list"
         id={searchId}
