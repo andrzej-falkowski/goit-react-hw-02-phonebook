@@ -1,25 +1,25 @@
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 
-const Filter = ({ filter, onChange }) => {
+const Filter = ({ value, handleChange }) => {
   const searchId = nanoid();
 
   return (
     <div>
-      <label>
-        Find contacts by name <br />
-        <input type="text" 
-        placeholder="Filter list" 
-        onChange={onChange}
+      <label htmlFor={searchId}>Find contacts by name </label>
+      <input
+        type="text"
+        placeholder="Filter list"
         id={searchId}
-        value={filter}
-         />
-      </label>
+        value={value}
+        onChange={handleChange}
+      />
     </div>
   );
 };
 export default Filter;
 
 Filter.propTypes = {
-  filter: PropTypes.string,
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
 };

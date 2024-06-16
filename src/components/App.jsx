@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
@@ -22,25 +23,39 @@ export default class App extends Component {
     });
   };
 
-  handleSubmit = (name, number) => {
-    const filtered = this.state.contacts.filter(
-      item =>
-        item.name.toLowerCase() === name.toLowerCase() && item.number === number
+  addContact = newContact => {
+
+    const isInContacts = this.state.contacts.some(
+      ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (filtered.length > 0) {
-      window.alert(JSON.stringify(`${name} is already in contacts`));
+    if (isInContacts) {
+      alert(`${newContact.name} is already in contacts`);
       return;
     }
-    this.setState(prev => {
-      const list = [...prev.contacts];
-      list.push({
-        id: nanoid(),
-        name: name,
-        number: number,
-      });
-      return { contacts: list };
-    });
+  
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
+    // if (this.contacts.filter.length > 0) {
+    //   window.alert(JSON.stringify(`${name} is already in contacts`));
+    //   return;
+    // }
+  //   this.setState(prev => {
+  //     const list = [...prev.contacts];
+  //     list.push({
+  //       id: nanoid(),
+  //       [name]: name,
+  //       [number]: number,
+  //     });
+  //     return { contacts: list };
+  //   });
+  // };
+
+  handleFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
   handleDelete = event => {
@@ -52,17 +67,17 @@ export default class App extends Component {
   };
 
   render() {
+    const { filter } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.handleSubmit} />
-
+        <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
-        <Filter filter={this.state.filter} onChange={this.handleChange}/>
+        <Filter value={filter} handleChange={this.handleFilter}/>
         <ContactList
            filter={this.state.filter}
            contacts={this.state.contacts}
-           deleteContact={this.handleDelete}
+           removeContact={this.handleDelete}
         />
       </div>
     );

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import styles from './ContactList.module.css';
 
-const ContactList = ({ filter, contacts, deleteContact }) => {
+const ContactList = ({ filter, contacts, removeContact }) => {
+
   return (
     <>
       <ul className={styles.list}>
@@ -15,7 +16,7 @@ const ContactList = ({ filter, contacts, deleteContact }) => {
               <button
                 className={styles.button}
                 type="submit"
-                onClick={() => deleteContact(contact.id)}
+                onClick={() => removeContact(contact.id)}
               >
                 Delete
               </button>
@@ -29,6 +30,12 @@ const ContactList = ({ filter, contacts, deleteContact }) => {
 export default ContactList;
 
 ContactList.propTypes = {
-  contacts: PropTypes.array,
-  deleteContact: PropTypes.func,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      number: PropTypes.string,
+    })
+  ),
+  removeContact: PropTypes.func,
 };
