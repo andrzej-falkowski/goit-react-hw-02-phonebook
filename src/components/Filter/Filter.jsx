@@ -7,10 +7,11 @@ const Filter = ({ value, handleChange }) => {
 
   return (
     <div className={styles.filterWrapper}>
-      <label htmlFor={searchId} >Find contacts by name </label>
-      <input className={styles.inputFilter}
+      <label htmlFor={searchId}>Find contacts by name </label>
+      <input
+        className={styles.inputFilter}
         type="text"
-        placeholder="Filter list"
+        placeholder="Filter contacts"
         id={searchId}
         value={value}
         onChange={handleChange}
